@@ -72,6 +72,7 @@ const navigation: NavEntry[] = [
     shortName: 'Assistant',
     children: [
       { name: 'Smart Assistant', href: '/smart-assistant', icon: ChatBubbleLeftRightIcon, shortName: 'Chat' },
+      { name: 'Manage Assistant', href: '/smart-assistant/settings', icon: Cog6ToothIcon, shortName: 'Manage' },
     ],
   },
 ];
