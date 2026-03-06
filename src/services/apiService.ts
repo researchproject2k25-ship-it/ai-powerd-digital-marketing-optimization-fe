@@ -2,6 +2,8 @@
  * API service for communicating with the FastAPI backend
  */
 
+import { authService } from './authService';
+
 export interface BackendSubmissionResponse {
   id: string;
   message: string;
@@ -45,6 +47,24 @@ export class ApiService {
   }
 
   /**
+   * Get headers with optional JWT token
+   */
+  private getHeaders(includeAuth: boolean = false): HeadersInit {
+    const headers: HeadersInit = {
+      'Content-Type': 'application/json',
+    };
+
+    if (includeAuth) {
+      const token = authService.getToken();
+      if (token) {
+        headers['Authorization'] = `Bearer ${token}`;
+      }
+    }
+
+    return headers;
+  }
+
+  /**
    * Test backend connection
    */
   async testConnection(): Promise<BackendHealthResponse> {
@@ -61,15 +81,14 @@ export class ApiService {
   }
 
   /**
-   * Submit form data to backend
+   * Submit form data to backend (save business profile with optional strategy generation)
    */
-  async submitForm(formData: any): Promise<BackendSubmissionResponse> {
+  async submitForm(formData: any, generateStrategy: boolean = true): Promise<BackendSubmissionResponse> {
     try {
-      const response = await fetch(`${this.baseUrl}/api/v1/forms/submit`, {
+      const url = `${this.baseUrl}/api/v1/forms/save-profile${generateStrategy ? '?generate_strategy=true' : ''}`;
+      const response = await fetch(url, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: this.getHeaders(true), // Include JWT token
         body: JSON.stringify(formData),
       });
 
@@ -79,7 +98,10 @@ export class ApiService {
       }
 
       const result = await response.json();
-      console.log('✅ Form submitted successfully:', result);
+      console.log('✅ Business profile saved successfully:', result);
+      if (generateStrategy) {
+        console.log('🎯 Strategy generation initiated');
+      }
       return result;
     } catch (error) {
       console.error('Form submission error:', error);
@@ -92,7 +114,12 @@ export class ApiService {
    */
   async getSubmissions(page: number = 1, limit: number = 50): Promise<BackendSubmissionListResponse> {
     try {
-      const response = await fetch(`${this.baseUrl}/api/v1/forms/submissions?page=${page}&limit=${limit}`);
+      const response = await fetch(
+        `${this.baseUrl}/api/v1/forms/submissions?page=${page}&limit=${limit}`,
+        {
+          headers: this.getHeaders(true), // Include JWT token
+        }
+      );
       
       if (!response.ok) {
         throw new Error(`Failed to fetch submissions: ${response.statusText}`);
@@ -189,7 +216,7 @@ export class ApiService {
   }
 
   /**
-   * Generate marketing strategy from profile data
+   * Generate marketing strategy from profile data (direct call to strategy generator)
    */
   async generateStrategy(smeProfile: any, trendData: any): Promise<StrategyGenerationResponse> {
     try {
@@ -213,6 +240,44 @@ export class ApiService {
       console.log('✅ Strategy generated successfully:', result);
       return result;
     } catch (error) {
+      console.error('Strategy generation error:', error);
+      throw error;
+    }
+  }
+
+  /**
+   * Generate marketing strategy for an existing submission (via backend)
+   * This uses the backend's orchestration which handles strategy generator calls
+   */
+  async generateStrategyForSubmission(submissionId: string): Promise<StrategyGenerationResponse> {
+    try {
+      // 10-minute timeout for LLM generation (matches backend timeout)
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 600000); // 10 minutes
+
+      const response = await fetch(
+        `${this.baseUrl}/api/v1/forms/submissions/${submissionId}/generate-strategy`,
+        {
+          method: 'POST',
+          headers: this.getHeaders(true), // Include JWT token
+          signal: controller.signal,
+        }
+      );
+
+      clearTimeout(timeoutId);
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(`Strategy generation failed (${response.status}): ${errorText}`);
+      }
+
+      const result = await response.json();
+      console.log('✅ Strategy generated for submission:', result);
+      return result;
+    } catch (error) {
+      if (error instanceof Error && error.name === 'AbortError') {
+        throw new Error('Strategy generation timed out after 10 minutes. The LLM may be slow or unavailable. Please try again.');
+      }
       console.error('Strategy generation error:', error);
       throw error;
     }

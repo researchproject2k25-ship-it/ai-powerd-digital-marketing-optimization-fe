@@ -38,11 +38,17 @@ const BUSINESS_STAGES = [
 ];
 
 export function BusinessProfileStep({ data, onDataUpdate }: BusinessProfileStepProps) {
-  const { register, watch, handleSubmit, setValue } = useForm<BusinessProfile>({
+  const { register, watch, handleSubmit, setValue, reset } = useForm<BusinessProfile>({
     defaultValues: data
   });
 
   const watchedData = watch();
+
+  // Reset form when data prop changes (for loading saved data)
+  useEffect(() => {
+    console.log('📥 BusinessProfileStep received data:', data);
+    reset(data);
+  }, [data, reset]);
 
   useEffect(() => {
     const subscription = watch((value) => {

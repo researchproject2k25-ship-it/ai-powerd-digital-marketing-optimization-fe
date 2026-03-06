@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { apiService } from '@/services/apiService';
-import { convertFormDataToSMEProfile, getMockTrendData } from '@/services/strategyConverter';
 import StrategyDisplay from '@/components/StrategyDisplay';
 
 interface SubmissionDetails {
@@ -54,28 +53,16 @@ export default function ResultsPage() {
       setStrategyLoading(true);
       setStrategyError(null);
 
-      // Convert form data to SME profile
-      const smeProfile = convertFormDataToSMEProfile(formData);
+      // Use backend to generate strategy (correct architecture)
+      const result = await apiService.generateStrategyForSubmission(submissionId);
 
-      // Try to get real trends, fallback to mock data
-      let trendData;
-      try {
-        trendData = await apiService.getTrends();
-      } catch (e) {
-        console.warn('Using mock trend data - Trend Agent not available');
-        trendData = getMockTrendData();
-      }
-
-      // Generate strategy
-      const result = await apiService.generateStrategy(smeProfile, trendData);
-
-      if (result.success && result.strategy) {
+      if (result.strategy) {
         setStrategy({
           data: result.strategy,
-          metadata: result.metadata,
+          metadata: result.metadata || {},
         });
       } else {
-        setStrategyError(result.error || 'Strategy generation failed');
+        setStrategyError('Strategy generation failed');
       }
     } catch (error) {
       setStrategyError(error instanceof Error ? error.message : 'Failed to generate strategy');

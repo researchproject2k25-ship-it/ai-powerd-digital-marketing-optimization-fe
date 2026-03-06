@@ -84,7 +84,7 @@ const STOCK_AVAILABILITY_OPTIONS = [
 ];
 
 export function MarketSituationStep({ data, onDataUpdate }: MarketSituationStepProps) {
-  const { register, watch, setValue, getValues } = useForm<MarketSituation>({
+  const { register, watch, setValue, getValues, reset } = useForm<MarketSituation>({
     defaultValues: {
       ...data,
       seasonality: data.seasonality || []
@@ -99,6 +99,15 @@ export function MarketSituationStep({ data, onDataUpdate }: MarketSituationStepP
 
   const recentPriceChanges = watch('recentPriceChanges');
   const seasonalityOther = watch('seasonalityOther');
+
+  useEffect(() => {
+    console.log('📥 [MarketSituationStep] received data:', data);
+    reset({
+      ...data,
+      seasonality: data.seasonality || []
+    });
+    setSelectedSeasonality(data.seasonality || []);
+  }, [data, reset]);
 
   useEffect(() => {
     const subscription = watch((value) => {

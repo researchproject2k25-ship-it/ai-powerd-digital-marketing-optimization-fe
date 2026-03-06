@@ -1,0 +1,495 @@
+/* ── AssistantLanding.css ─────────────────────────────────────────────────── */
+
+@keyframes sai-ring {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50%       { transform: scale(1.22); opacity: 0.4; }
+}
+
+@keyframes sai-fade-up {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Root ────────────────────────────────────────────────────────────────────── */
+.sai-root {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: #0B0F14;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(55, 65, 81, 0.6) transparent;
+}
+
+/* Ambient blobs ────────────────────────────────────────────────────────────── */
+.sai-blobs {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.sai-blob {
+  position: absolute;
+  border-radius: 50%;
+}
+
+.sai-blob-1 {
+  width: 600px;
+  height: 600px;
+  top: -120px;
+  left: -120px;
+  background: radial-gradient(circle, #22c55e 0%, transparent 70%);
+  opacity: 0.13;
+  filter: blur(120px);
+}
+
+.sai-blob-2 {
+  width: 500px;
+  height: 500px;
+  top: 200px;
+  right: -100px;
+  background: radial-gradient(circle, #6366f1 0%, transparent 70%);
+  opacity: 0.09;
+  filter: blur(140px);
+}
+
+.sai-blob-3 {
+  width: 400px;
+  height: 400px;
+  bottom: 100px;
+  left: 30%;
+  background: radial-gradient(circle, #0ea5e9 0%, transparent 70%);
+  opacity: 0.07;
+  filter: blur(160px);
+}
+
+/* Content wrapper ──────────────────────────────────────────────────────────── */
+.sai-content {
+  position: relative;
+  z-index: 10;
+  max-width: 768px;
+  margin: 0 auto;
+  padding: 3rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+@media (min-width: 768px) {
+  .sai-content { padding: 4rem 1.25rem; }
+}
+
+/* Shared section animation helpers ─────────────────────────────────────────── */
+.sai-section {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.sai-section.sai-visible { opacity: 1; transform: translateY(0); }
+.sai-section.sai-d1 { transition-delay: 0.15s; }
+.sai-section.sai-d2 { transition-delay: 0.25s; }
+.sai-section.sai-d3 { transition-delay: 0.35s; }
+.sai-section.sai-d4 { transition-delay: 0.45s; }
+
+/* ── HERO ────────────────────────────────────────────────────────────────── */
+.sai-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.25rem;
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+
+.sai-hero.sai-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Icon wrapper */
+.sai-icon-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 76px;
+  height: 76px;
+}
+
+.sai-ring-1,
+.sai-ring-2 {
+  position: absolute;
+  inset: 0;
+  border-radius: 1rem;
+}
+
+.sai-ring-1 {
+  background: rgba(34, 197, 94, 0.08);
+  border: 1px solid rgba(34, 197, 94, 0.25);
+  animation: sai-ring 2.4s ease-in-out infinite;
+}
+
+.sai-ring-2 {
+  background: rgba(34, 197, 94, 0.04);
+  border: 1px solid rgba(34, 197, 94, 0.12);
+  animation: sai-ring 2.4s ease-in-out 0.8s infinite;
+}
+
+.sai-icon-inner {
+  position: relative;
+  z-index: 10;
+  width: 52px;
+  height: 52px;
+  border-radius: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.18) 0%, rgba(34, 197, 94, 0.06) 100%);
+  border: 1px solid rgba(34, 197, 94, 0.35);
+  box-shadow: 0 0 24px rgba(34, 197, 94, 0.18);
+}
+
+/* Badge */
+.sai-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  background: rgba(34, 197, 94, 0.08);
+  border: 1px solid rgba(34, 197, 94, 0.22);
+  color: #4ade80;
+}
+
+.sai-badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #22c55e;
+  display: inline-block;
+  animation: sa-pulse 2.2s infinite;
+}
+
+/* Headline — MSR style */
+.sai-headline {
+  font-size: clamp(28px, 5vw, 42px);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+  color: #F9FAFB;
+}
+
+/* Description */
+.sai-desc {
+  font-size: 15px;
+  line-height: 1.75;
+  color: #9ca3af;
+  font-weight: 400;
+  max-width: 32rem;
+}
+
+/* Primary CTA */
+.sai-cta-primary {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.75rem 1.75rem;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+  overflow: hidden;
+  background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+  color: #fff;
+  border: none;
+  box-shadow: 0 0 32px rgba(34, 197, 94, 0.35), 0 4px 16px rgba(0, 0, 0, 0.4);
+  transition: box-shadow 0.2s ease, transform 0.15s ease;
+  font-family: var(--font-montserrat), system-ui, sans-serif;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+}
+
+.sai-cta-primary:hover {
+  box-shadow: 0 0 48px rgba(34, 197, 94, 0.55), 0 4px 20px rgba(0, 0, 0, 0.5);
+  transform: translateY(-1px);
+}
+
+.sai-cta-arr {
+  transition: transform 0.2s ease;
+}
+.sai-cta-primary:hover .sai-cta-arr {
+  transform: translateX(2px);
+}
+
+/* ── CAPABILITIES ────────────────────────────────────────────────────────── */
+.sai-section-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.sai-section-title {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: #f9fafb;
+}
+
+.sai-section-sub {
+  font-size: 13px;
+  color: #6b7280;
+  margin-top: 0.375rem;
+}
+
+.sai-caps-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+}
+
+@media (min-width: 640px) {
+  .sai-caps-grid { grid-template-columns: 1fr 1fr; }
+}
+
+.sai-cap-card {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 1rem;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(55, 65, 81, 0.8);
+  transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+  animation: sai-fade-up 0.45s ease both;
+}
+
+.sai-cap-card:nth-child(1) { animation-delay: 0s; }
+.sai-cap-card:nth-child(2) { animation-delay: 0.05s; }
+.sai-cap-card:nth-child(3) { animation-delay: 0.10s; }
+.sai-cap-card:nth-child(4) { animation-delay: 0.15s; }
+.sai-cap-card:nth-child(5) { animation-delay: 0.20s; }
+.sai-cap-card:nth-child(6) { animation-delay: 0.25s; }
+
+.sai-cap-card:hover {
+  border-color: rgba(55, 65, 81, 1);
+  background: rgba(0, 0, 0, 0.4);
+  transform: translateY(-2px);
+}
+
+.sai-cap-icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 0.75rem;
+  background: rgba(34, 197, 94, 0.10);
+  border: 1px solid rgba(34, 197, 94, 0.20);
+  color: #4ade80;
+}
+
+.sai-cap-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #f9fafb;
+  margin-bottom: 3px;
+}
+
+.sai-cap-desc {
+  font-size: 12px;
+  color: #6b7280;
+  line-height: 1.6;
+}
+
+/* ── HOW IT WORKS ────────────────────────────────────────────────────────── */
+.sai-how-steps {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+@media (min-width: 640px) {
+  .sai-how-steps { flex-direction: row; }
+}
+
+.sai-how-connector {
+  display: none;
+  position: absolute;
+  top: 1.75rem;
+  left: 16.67%;
+  right: 16.67%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(34, 197, 94, 0.3), transparent);
+}
+
+@media (min-width: 640px) {
+  .sai-how-connector { display: block; }
+}
+
+.sai-how-step {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 1.25rem 1rem;
+  animation: sai-fade-up 0.45s ease both;
+}
+
+.sai-how-step:nth-child(2) { animation-delay: 0.1s; }
+.sai-how-step:nth-child(3) { animation-delay: 0.2s; }
+
+.sai-step-num {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  font-family: var(--font-montserrat), system-ui;
+  letter-spacing: 0.05em;
+  box-shadow: 0 0 16px rgba(34, 197, 94, 0.4);
+  margin-bottom: 1rem;
+}
+
+.sai-step-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #f9fafb;
+  margin-bottom: 4px;
+}
+
+.sai-step-desc {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+/* ── PRIVACY ─────────────────────────────────────────────────────────────── */
+.sai-privacy-card {
+  border-radius: 1rem;
+  padding: 1.5rem;
+  background: rgba(34, 197, 94, 0.04);
+  border: 1px solid rgba(34, 197, 94, 0.18);
+}
+
+.sai-privacy-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.sai-privacy-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 38px;
+  height: 38px;
+  border-radius: 0.75rem;
+  background: rgba(34, 197, 94, 0.10);
+  border: 1px solid rgba(34, 197, 94, 0.20);
+  color: #4ade80;
+}
+
+.sai-privacy-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #f9fafb;
+}
+
+.sai-privacy-subtitle {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.sai-privacy-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+}
+
+@media (min-width: 640px) {
+  .sai-privacy-grid { grid-template-columns: 1fr 1fr; }
+}
+
+.sai-privacy-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.sai-check-icon {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.sai-pt-label {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #e5e7eb;
+}
+
+.sai-pt-sub {
+  font-size: 11.5px;
+  color: #6b7280;
+  margin-top: 1px;
+}
+
+/* ── FOOTER CTA ──────────────────────────────────────────────────────────── */
+.sai-footer-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+  padding-bottom: 1rem;
+  opacity: 0;
+  transition: opacity 0.6s ease 0.45s;
+}
+
+.sai-footer-section.sai-visible {
+  opacity: 1;
+}
+
+.sai-footer-text {
+  font-size: 13px;
+  color: #4b5563;
+}
+
+.sai-cta-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.5rem;
+  border-radius: 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  background: transparent;
+  border: 1px solid rgba(34, 197, 94, 0.35);
+  color: #4ade80;
+  transition: background 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+  font-family: var(--font-montserrat), system-ui;
+  cursor: pointer;
+}
+
+.sai-cta-secondary:hover {
+  background: rgba(34, 197, 94, 0.08);
+  border-color: rgba(34, 197, 94, 0.5);
+  box-shadow: 0 0 20px rgba(34, 197, 94, 0.12);
+}

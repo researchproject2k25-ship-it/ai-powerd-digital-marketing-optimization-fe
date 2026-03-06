@@ -43,11 +43,16 @@ const BRAND_COLORS = [
 ];
 
 export function PlatformsPreferencesStep({ data, onDataUpdate }: PlatformsPreferencesStepProps) {
-  const { register, watch, setValue, getValues } = useForm<PlatformsPreferences>({
+  const { register, watch, setValue, getValues, reset } = useForm<PlatformsPreferences>({
     defaultValues: data
   });
 
   const watchedData = watch();
+
+  useEffect(() => {
+    console.log('📥 [PlatformsPreferencesStep] received data:', data);
+    reset(data);
+  }, [data, reset]);
 
   useEffect(() => {
     const subscription = watch((value) => {

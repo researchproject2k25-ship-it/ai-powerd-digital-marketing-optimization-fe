@@ -2,6 +2,8 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { ProtectedRoute } from '@/components/ProtectedRoute';
+import { AuthHeader } from '@/components/AuthHeader';
 import Sidebar from '@/components/Sidebar';
 import { StepIndicator } from '@/components/StepIndicator';
 import { BusinessProfileStep } from '@/components/steps/BusinessProfileStep';
@@ -15,6 +17,7 @@ import { MarketSituationStep } from '@/components/steps/MarketSituationStep';
 import { ReviewStep } from '@/components/steps/ReviewStep';
 import { type FormStep, type MarketingStrategyFormData, type StepConfig } from '@/types';
 import { formDataProcessor, ProcessingOptions } from '@/services/formDataProcessor';
+import { generateStrategy } from '@/services/strategyApiService';
 
 const STEPS: StepConfig[] = [
   {
@@ -64,7 +67,7 @@ const STEPS: StepConfig[] = [
   }
 ];
 
-export default function Home() {
+function Home() {
   const router = useRouter();
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const [formData, setFormData] = useState<Partial<MarketingStrategyFormData>>({});
@@ -95,88 +98,27 @@ export default function Home() {
 
   const handleSubmit = async () => {
     setIsSubmitting(true);
-    setProcessingStatus('Validating form data...');
-    
+    setProcessingStatus('Checking your answers...');
+
     try {
-      // Validate form data completeness
+      // Validate form completeness
       const validation = formDataProcessor.validateFormData(formData as MarketingStrategyFormData);
-      
       if (!validation.isValid) {
-        throw new Error(`Form is incomplete. Missing fields: ${validation.missingFields.join(', ')}`);
+        throw new Error(`Please fill in these sections: ${validation.missingFields.join(', ')}`);
       }
 
-      // Set processing options
-      const processingOptions: ProcessingOptions = {
-        enableTranslation: true,
-        includeMetadata: true,
-        removeEmptyFields: true,
-      };
+      // Generate strategy via real backend
+      setProcessingStatus('Creating your personalised marketing strategy... This usually takes about 30 seconds.');
+      await generateStrategy(formData);
 
-      // Process form data with language detection and translation
-      setProcessingStatus('Detecting languages and translating content...');
-      const result = await formDataProcessor.processAndSubmit(
-        formData as MarketingStrategyFormData,
-        processingOptions
-      );
-
-      if (result.success) {
-        setProcessingResult(result);
-        setProcessingStatus('Processing completed successfully!');
-        
-        // Show processing summary
-        console.log('📊 Processing Summary:', {
-          detectedLanguage: result.processingMetadata.detectedLanguage,
-          translationApplied: result.processingMetadata.translationApplied,
-          translatedFields: result.processingMetadata.translatedFieldsCount,
-          processingTime: `${result.processingMetadata.totalProcessingTime}ms`,
-          completionRate: `${result.processingMetadata.completionRate}%`,
-        });
-
-        // Log AI prompt for debugging
-        if (result.aiPrompt) {
-          console.log('🤖 Generated AI Prompt:', result.aiPrompt);
-        }
-
-        // Handle backend response
-        if ('backendResponse' in result && result.backendResponse) {
-          console.log('✅ Backend response:', result.backendResponse);
-          const backendResult = result.backendResponse as any;
-          
-          // Show success message with submission details
-          setProcessingStatus(`✅ Form submitted successfully! Redirecting to results...`);
-          
-          // Navigate to results page
-          setTimeout(() => {
-            router.push(`/results/${backendResult.id}`);
-          }, 2000);
-          
-        } else if ('backendError' in result && result.backendError) {
-          console.warn('⚠️ Backend submission failed:', result.backendError);
-          setProcessingStatus(`⚠️ Processing completed but backend submission failed: ${result.backendError}`);
-          // Show warning but still display processing results
-        }
-
-        // Option to download JSON
-        if (result.data) {
-          const jsonExport = formDataProcessor.exportAsJSON(result.data);
-          console.log('💾 JSON export available:', jsonExport.filename);
-          
-          // Optionally trigger download
-          const blob = new Blob([jsonExport.json], { type: 'application/json' });
-          const url = URL.createObjectURL(blob);
-          const link = document.createElement('a');
-          link.href = url;
-          link.download = jsonExport.filename;
-          // Uncomment to auto-download: document.body.appendChild(link); link.click(); document.body.removeChild(link);
-        }
-
-      } else {
-        throw new Error(`Processing failed: ${result.errors?.join(', ')}`);
-      }
+      setProcessingStatus('✅ Your strategy is ready! Taking you there now...');
+      setTimeout(() => {
+        router.push('/dashboard/strategy/view');
+      }, 1200);
 
     } catch (error) {
-      console.error('❌ Form submission failed:', error);
-      setProcessingStatus(`Error: ${error instanceof Error ? error.message : 'Unknown error'}`);
+      console.error('❌ Strategy generation failed:', error);
+      setProcessingStatus(`Something went wrong: ${error instanceof Error ? error.message : 'Please try again'}`);
     } finally {
       setIsSubmitting(false);
     }
@@ -228,9 +170,9 @@ export default function Home() {
             <div className="max-w-4xl mx-auto px-8 py-8">
               <div className="flex items-center justify-between">
                 <div>
-                  <h1 className="text-2xl font-semibold text-[#F9FAFB] mb-1">Serendib AI</h1>
+                  <h1 className="text-2xl font-semibold text-[#F9FAFB] mb-1">Tell Us About Your Business</h1>
                   <p className="text-[#CBD5E1] text-sm">
-                    Get personalized marketing strategies tailored to your business
+                    Answer a few questions and we'll build a marketing plan just for you
                   </p>
                 </div>
                 <a
@@ -292,5 +234,14 @@ export default function Home() {
         </div>
       </main>
     </div>
+  );
+}
+
+export default function Page() {
+  return (
+    <ProtectedRoute>
+      <AuthHeader />
+      <Home />
+    </ProtectedRoute>
   );
 }

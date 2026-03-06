@@ -116,11 +116,16 @@ const GROWTH_OPPORTUNITIES = [
 ];
 
 export function StrengthsOpportunitiesStep({ data, onDataUpdate }: StrengthsOpportunitiesStepProps) {
-  const { register, watch, setValue } = useForm<StrengthsOpportunities>({
+  const { register, watch, setValue, reset } = useForm<StrengthsOpportunities>({
     defaultValues: data
   });
 
   const watchedData = watch();
+
+  useEffect(() => {
+    console.log('📥 [StrengthsOpportunitiesStep] received data:', data);
+    reset(data);
+  }, [data, reset]);
 
   useEffect(() => {
     const subscription = watch((value) => {

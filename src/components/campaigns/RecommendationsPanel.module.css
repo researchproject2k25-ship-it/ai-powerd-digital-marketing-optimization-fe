@@ -1,0 +1,514 @@
+/* ============================================================
+   RecommendationsPanel.module.css
+   Sri Lankan SME-focused recommendations panel styles
+   ============================================================ */
+
+.panel {
+  background: #111111;
+  border: 1px solid #374151;
+  border-radius: 16px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  max-height: calc(100vh - 180px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: #374151 transparent;
+}
+
+.panel::-webkit-scrollbar { width: 5px; }
+.panel::-webkit-scrollbar-track { background: transparent; }
+.panel::-webkit-scrollbar-thumb { background: #374151; border-radius: 4px; }
+.panel::-webkit-scrollbar-thumb:hover { background: #374151; }
+
+/* ─── Header ──────────────────────────────────────────────── */
+
+.panelHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.panelTitle {
+  font-size: 15px;
+  font-weight: 600;
+  color: #f9fafb;
+  margin: 0 0 3px;
+}
+
+.panelSubtitle {
+  font-size: 12px;
+  color: #64748b;
+  margin: 0;
+}
+
+.topicBadge {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 10px;
+  font-weight: 600;
+  background: rgba(34, 197, 94, 0.12);
+  color: #22c55e;
+  border: 1px solid rgba(34, 197, 94, 0.25);
+  vertical-align: middle;
+}
+
+.overallBadge {
+  padding: 4px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  border: 1px solid;
+}
+
+/* ─── Score colours ───────────────────────────────────────── */
+
+.scoreHigh  { background: rgba(34, 197, 94, 0.1);  color: #22c55e; border-color: rgba(34, 197, 94, 0.3); }
+.scoreMid   { background: rgba(251, 191, 36, 0.1); color: #fbbf24; border-color: rgba(251, 191, 36, 0.3); }
+.scoreLow   { background: rgba(248, 113, 113, 0.1);color: #f87171; border-color: rgba(248, 113, 113, 0.3); }
+
+/* ─── Score bars ──────────────────────────────────────────── */
+
+.scoreGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid #374151;
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.scoreCard {
+  display: grid;
+  grid-template-columns: 72px 1fr 42px;
+  align-items: center;
+  gap: 10px;
+}
+
+.scoreLabel {
+  font-size: 11px;
+  font-weight: 600;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.scoreBarWrap {
+  height: 6px;
+  background: #374151;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.scoreBar {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.6s ease;
+}
+
+.scoreBar.scoreHigh { background: #22c55e; }
+.scoreBar.scoreMid  { background: #fbbf24; }
+.scoreBar.scoreLow  { background: #f87171; }
+
+.scoreValue {
+  font-size: 12px;
+  font-weight: 600;
+  text-align: right;
+}
+
+/* ─── Lift banner ─────────────────────────────────────────── */
+
+.liftBanner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.07), rgba(16, 185, 129, 0.04));
+  border: 1px solid rgba(34, 197, 94, 0.2);
+  border-radius: 10px;
+  font-size: 12px;
+  color: #94a3b8;
+  line-height: 1.55;
+}
+
+.liftBanner svg {
+  flex-shrink: 0;
+  color: #22c55e;
+}
+
+.liftBanner strong {
+  color: #22c55e;
+}
+
+/* ─── Sections ────────────────────────────────────────────── */
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sectionTitle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin: 0;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #374151;
+}
+
+.sectionIcon {
+  font-size: 13px;
+  line-height: 1;
+}
+
+.sectionBadge {
+  margin-left: auto;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.badgeGood {
+  background: rgba(34, 197, 94, 0.1);
+  color: #22c55e;
+  border: 1px solid rgba(34, 197, 94, 0.2);
+}
+
+.badgeWarn {
+  background: rgba(251, 191, 36, 0.1);
+  color: #fbbf24;
+  border: 1px solid rgba(251, 191, 36, 0.2);
+}
+
+/* ─── Issue list ────────────────────────────────────────────  */
+
+.issueList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.issueItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 12px;
+  color: #94a3b8;
+  line-height: 1.55;
+}
+
+.issueDot {
+  flex-shrink: 0;
+  margin-top: 6px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #fbbf24;
+  opacity: 0.8;
+}
+
+.issueDotGreen {
+  flex-shrink: 0;
+  margin-top: 6px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #22c55e;
+  opacity: 0.8;
+}
+
+/* ─── Tips grid ──────────────────────────────────────────── */
+
+.tipsGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tipCard {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid #374151;
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+
+.tipNum {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgba(34, 197, 94, 0.1);
+  border: 1px solid rgba(34, 197, 94, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 600;
+  color: #22c55e;
+}
+
+.tipText {
+  font-size: 12px;
+  color: #94a3b8;
+  line-height: 1.55;
+  margin: 0;
+}
+
+.successNote {
+  font-size: 12px;
+  color: #22c55e;
+  padding: 10px 14px;
+  background: rgba(34, 197, 94, 0.06);
+  border: 1px solid rgba(34, 197, 94, 0.15);
+  border-radius: 8px;
+  margin: 0;
+}
+
+/* ─── Timing ─────────────────────────────────────────────── */
+
+.timeBox {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid #374151;
+  border-radius: 10px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.timeRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.timeKey {
+  font-size: 11px;
+  font-weight: 600;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  min-width: 80px;
+  padding-top: 1px;
+}
+
+.timeVal {
+  font-size: 12px;
+  color: #cbd5e1;
+  line-height: 1.5;
+}
+
+.timeHighlight {
+  color: #22c55e;
+  font-weight: 600;
+}
+
+.timingNote {
+  font-size: 12px;
+  color: #fbbf24;
+  margin: 0;
+  padding: 8px 10px;
+  background: rgba(251, 191, 36, 0.05);
+  border: 1px solid rgba(251, 191, 36, 0.15);
+  border-radius: 6px;
+  line-height: 1.5;
+}
+
+.timingSuccess {
+  font-size: 12px;
+  color: #22c55e;
+  margin: 0;
+  padding: 8px 10px;
+  background: rgba(34, 197, 94, 0.05);
+  border: 1px solid rgba(34, 197, 94, 0.15);
+  border-radius: 6px;
+}
+
+/* ─── Hashtags ───────────────────────────────────────────── */
+
+.hashtagNote {
+  font-size: 11px;
+  color: #4b5563;
+  margin: 0;
+}
+
+.hashtagGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.hashtag {
+  font-size: 12px;
+  font-weight: 500;
+  color: #22c55e;
+  background: rgba(34, 197, 94, 0.08);
+  border: 1px solid rgba(34, 197, 94, 0.2);
+  border-radius: 6px;
+  padding: 4px 10px;
+  cursor: pointer;
+  transition: all 0.15s;
+  user-select: none;
+}
+
+.hashtag:hover {
+  background: rgba(34, 197, 94, 0.16);
+  border-color: rgba(34, 197, 94, 0.4);
+}
+
+/* ─── Boost box ──────────────────────────────────────────── */
+
+.boostBox {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid #374151;
+  border-radius: 10px;
+  padding: 14px 16px;
+}
+
+.boostText {
+  font-size: 13px;
+  color: #cbd5e1;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ─── Sri Lankan Toolkit ─────────────────────────────────── */
+
+.toolkitGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.toolkitItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid #374151;
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+
+.toolkitNum {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgba(251, 191, 36, 0.08);
+  border: 1px solid rgba(251, 191, 36, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 600;
+  color: #fbbf24;
+}
+
+.toolkitText {
+  font-size: 12px;
+  color: #94a3b8;
+  line-height: 1.55;
+  margin: 0;
+}
+
+/* ─── Checklist ───────────────────────────────────────────── */
+
+.checklistGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+@media (max-width: 680px) {
+  .checklistGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.checkItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.checkDone {
+  background: rgba(34, 197, 94, 0.05);
+  border-color: rgba(34, 197, 94, 0.15);
+}
+
+.checkPending {
+  background: rgba(100, 116, 139, 0.04);
+  border-color: #374151;
+}
+
+.checkIcon {
+  flex-shrink: 0;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.checkDone .checkIcon  { color: #22c55e; }
+.checkPending .checkIcon { color: #4b5563; }
+
+.checkText {
+  color: #94a3b8;
+}
+
+.checkDone .checkText { color: #cbd5e1; }
+
+/* ─── Insight footer ─────────────────────────────────────── */
+
+.insightFooter {
+  padding: 14px 16px;
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.06), rgba(16, 185, 129, 0.03));
+  border: 1px solid rgba(34, 197, 94, 0.18);
+  border-radius: 10px;
+}
+
+.insightLabel {
+  font-size: 10px;
+  font-weight: 600;
+  color: #22c55e;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin: 0 0 6px;
+}
+
+.insightText {
+  font-size: 12px;
+  color: #94a3b8;
+  line-height: 1.65;
+  margin: 0;
+}
+
+.insightText strong {
+  color: #cbd5e1;
+}

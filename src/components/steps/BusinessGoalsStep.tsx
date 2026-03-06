@@ -30,11 +30,16 @@ const SECONDARY_GOALS = [
 ];
 
 export function BusinessGoalsStep({ data, onDataUpdate }: BusinessGoalsStepProps) {
-  const { register, watch, setValue } = useForm<BusinessGoals>({
+  const { register, watch, setValue, reset } = useForm<BusinessGoals>({
     defaultValues: data
   });
 
   const watchedData = watch();
+
+  useEffect(() => {
+    console.log('📥 [BusinessGoalsStep] received data:', data);
+    reset(data);
+  }, [data, reset]);
 
   useEffect(() => {
     const subscription = watch((value) => {

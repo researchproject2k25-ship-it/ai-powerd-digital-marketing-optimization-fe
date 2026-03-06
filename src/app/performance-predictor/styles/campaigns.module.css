@@ -1,0 +1,670 @@
+/* ============================================================
+   campaigns.module.css
+   Styles for the main Campaigns page
+   ============================================================ */
+
+/* ─── Hero / Landing view ───────────────────────────────────── */
+
+.heroBg {
+  position: relative;
+  min-height: 100vh;
+  background: #0b0f14;
+  overflow: hidden;
+}
+
+.auroraLayer {
+  position: absolute;
+  inset: 0;
+  opacity: 0.4;
+}
+
+.heroContent {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 24px;
+  text-align: center;
+}
+
+.heroInner {
+  max-width: 720px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+}
+
+.heroBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 14px;
+  background: rgba(34, 197, 94, 0.08);
+  border: 1px solid rgba(34, 197, 94, 0.2);
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #22c55e;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.heroBadgeDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #22c55e;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.5; transform: scale(0.85); }
+}
+
+.heroTitle {
+  font-size: clamp(36px, 5vw, 58px);
+  font-weight: 600;
+  color: #f9fafb;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  margin: 0;
+}
+
+.heroTitleAccent {
+  color: #22c55e;
+}
+
+.heroDescription {
+  font-size: 16px;
+  color: #94a3b8;
+  max-width: 560px;
+  line-height: 1.7;
+  margin: 0;
+}
+
+.statsRow {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  padding: 18px 28px;
+  background: rgba(17, 17, 17, 0.7);
+  border: 1px solid #374151;
+  border-radius: 16px;
+  backdrop-filter: blur(8px);
+}
+
+.statItem {
+  text-align: center;
+}
+
+.statValue {
+  font-size: 20px;
+  font-weight: 600;
+  color: #f9fafb;
+  letter-spacing: -0.02em;
+}
+
+.statLabel {
+  font-size: 11px;
+  color: #64748b;
+  margin-top: 2px;
+  letter-spacing: 0.02em;
+}
+
+.statDivider {
+  width: 1px;
+  height: 32px;
+  background: #374151;
+}
+
+.tryNowBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 36px;
+  background: #22c55e;
+  color: #fff;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border-radius: 14px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 0 30px rgba(34, 197, 94, 0.2);
+}
+
+.tryNowBtn:hover {
+  background: #16a34a;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(34, 197, 94, 0.35);
+}
+
+.tryNowArrow {
+  transition: transform 0.2s;
+}
+
+.tryNowBtn:hover .tryNowArrow {
+  transform: translateX(4px);
+}
+
+/* ─── Predictor view ─────────────────────────────────────────── */
+
+.predictorPage {
+  min-height: 100vh;
+  background: #0b0f14;
+  color: #f9fafb;
+  padding: 48px 24px 64px;
+}
+
+.predictorCenter {
+  max-width: 780px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* ─── Centered heading ───────────────────────────────────────── */
+
+.centeredHeader {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.centeredTitle {
+  font-size: clamp(22px, 3vw, 30px);
+  font-weight: 600;
+  color: #f9fafb;
+  letter-spacing: -0.025em;
+  margin: 0;
+}
+
+.centeredSubtitle {
+  font-size: 14px;
+  color: #94a3b8;
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* ─── Wide container (form + results side-by-side) ──────────── */
+
+.predictorWide {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* ─── Side-by-side layout ────────────────────────────────────── */
+
+.sideLayout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+.sideLeft {
+  position: sticky;
+  top: 24px;
+}
+
+.sideRight {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ─── Results section (below form) ──────────────────────────── */
+
+.resultsSection {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ─── Back link button ───────────────────────────────────────── */
+
+.backLinkBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  color: #4b5563;
+  font-size: 13px;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.15s;
+  font-family: inherit;
+  align-self: flex-start;
+}
+
+.backLinkBtn:hover {
+  color: #94a3b8;
+}
+
+/* ─── Keep old selectors used elsewhere ─────────────────────── */
+
+.predictorContainer {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.pageHeader {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 28px;
+}
+
+.backBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  border: 1px solid #374151;
+  background: transparent;
+  color: #94a3b8;
+  cursor: pointer;
+  transition: all 0.15s;
+  flex-shrink: 0;
+}
+
+.backBtn:hover {
+  border-color: rgba(34, 197, 94, 0.3);
+  color: #f9fafb;
+}
+
+.headerText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.pageTitle {
+  font-size: 18px;
+  font-weight: 600;
+  color: #f9fafb;
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+.pageSubtitle {
+  font-size: 13px;
+  color: #64748b;
+  margin: 0;
+}
+
+/* ─── Main grid ──────────────────────────────────────────────── */
+
+.mainGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+.leftColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.rightColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ─── Explainability row (full width) ─────────────────────────── */
+
+.explainRow {
+  margin-top: 4px;
+}
+
+/* ─── Tabs ─────────────────────────────────────────────────────── */
+
+.tabsRow {
+  display: flex;
+  gap: 8px;
+}
+
+.tab {
+  padding: 8px 18px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  border: 1px solid #374151;
+  background: transparent;
+  color: #94a3b8;
+  transition: all 0.15s;
+}
+
+.tabActive {
+  background: rgba(34, 197, 94, 0.08);
+  border-color: rgba(34, 197, 94, 0.3);
+  color: #22c55e;
+  font-weight: 600;
+}
+
+@media (max-width: 900px) {
+  .mainGrid {
+    grid-template-columns: 1fr;
+  }
+  .sideLayout {
+    grid-template-columns: 1fr;
+  }
+  .sideLeft {
+    position: static;
+  }
+}
+
+@media (max-width: 480px) {
+  .statsRow {
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .statDivider {
+    width: 60px;
+    height: 1px;
+  }
+}
+
+/* ─── History Hero Button ─────────────────────────────────────── */
+
+.historyHeroBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  background: transparent;
+  color: #94a3b8;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  border-radius: 14px;
+  border: 1px solid #374151;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.historyHeroBtn:hover {
+  border-color: rgba(34, 197, 94, 0.3);
+  color: #22c55e;
+  background: rgba(34, 197, 94, 0.05);
+}
+
+/* ─── Saved Banner ───────────────────────────────────────────── */
+
+.savedBanner {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 14px;
+  background: rgba(34, 197, 94, 0.08);
+  border: 1px solid rgba(34, 197, 94, 0.25);
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #22c55e;
+  letter-spacing: 0.03em;
+}
+
+/* ─── History Page Header ────────────────────────────────────── */
+
+.historyPageHeader {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.historyRefreshBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  background: transparent;
+  border: 1px solid #374151;
+  border-radius: 10px;
+  color: #64748b;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+
+.historyRefreshBtn:hover:not(:disabled) {
+  border-color: rgba(34, 197, 94, 0.3);
+  color: #22c55e;
+}
+
+.historyRefreshBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ─── History States ─────────────────────────────────────────── */
+
+.historyLoadingBox {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 24px;
+  color: #64748b;
+}
+
+.historyErrorBox {
+  padding: 14px 18px;
+  background: rgba(239, 68, 68, 0.08);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  border-radius: 10px;
+  color: #f87171;
+  font-size: 14px;
+}
+
+.historyEmpty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 60px 24px;
+  color: #64748b;
+  font-size: 15px;
+  text-align: center;
+}
+
+.loadingSpinnerSm {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #374151;
+  border-top-color: #22c55e;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ─── History List ───────────────────────────────────────────── */
+
+.historyList {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* ─── History Card ───────────────────────────────────────────── */
+
+.historyCard {
+  background: #111111;
+  border: 1px solid #374151;
+  border-radius: 14px;
+  padding: 18px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: border-color 0.15s;
+}
+
+.historyCard:hover {
+  border-color: #374151;
+}
+
+.historyCardTop {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.historyPlatformBadge {
+  padding: 4px 10px;
+  background: rgba(34, 197, 94, 0.1);
+  border: 1px solid rgba(34, 197, 94, 0.2);
+  border-radius: 20px;
+  color: #22c55e;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.historyDate {
+  font-size: 12px;
+  color: #4b5563;
+  margin-left: auto;
+}
+
+.historyExplainBadge {
+  padding: 3px 9px;
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 20px;
+  color: #60a5fa;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.historyCaption {
+  font-size: 13px;
+  color: #94a3b8;
+  margin: 0;
+  line-height: 1.5;
+  font-style: normal;
+}
+
+.historyCaption em {
+  color: #374151;
+  font-style: italic;
+}
+
+/* ─── History Metrics Row ────────────────────────────────────── */
+
+.historyMetrics {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.historyMetric {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 50px;
+}
+
+.historyMetricVal {
+  font-size: 16px;
+  font-weight: 600;
+  color: #f9fafb;
+  letter-spacing: -0.02em;
+}
+
+.historyMetricLbl {
+  font-size: 10px;
+  color: #4b5563;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* ─── History Actions ────────────────────────────────────────── */
+
+.historyActions {
+  display: flex;
+  gap: 10px;
+  padding-top: 4px;
+  border-top: 1px solid #374151;
+}
+
+.historyViewBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 16px;
+  background: rgba(34, 197, 94, 0.08);
+  border: 1px solid rgba(34, 197, 94, 0.2);
+  border-radius: 8px;
+  color: #22c55e;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.historyViewBtn:hover {
+  background: rgba(34, 197, 94, 0.15);
+  border-color: rgba(34, 197, 94, 0.4);
+}
+
+.historyDeleteBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 16px;
+  background: rgba(239, 68, 68, 0.06);
+  border: 1px solid rgba(239, 68, 68, 0.15);
+  border-radius: 8px;
+  color: #f87171;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.historyDeleteBtn:hover:not(:disabled) {
+  background: rgba(239, 68, 68, 0.12);
+  border-color: rgba(239, 68, 68, 0.3);
+}
+
+.historyDeleteBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.deletingSpinner {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border: 2px solid rgba(248, 113, 113, 0.3);
+  border-top-color: #f87171;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+

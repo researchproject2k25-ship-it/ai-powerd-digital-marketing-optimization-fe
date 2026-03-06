@@ -1,0 +1,1258 @@
+/* ============================================================
+   ExplainabilityPanel.module.css
+   Styles for the Groq-powered explainability panel
+   ============================================================ */
+
+.panel {
+  background: #111111;
+  border: 1px solid #374151;
+  border-radius: 16px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.panelHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.panelTitleGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.panelTitle {
+  font-size: 15px;
+  font-weight: 600;
+  color: #f9fafb;
+  margin: 0;
+}
+
+.panelSubtitle {
+  font-size: 12px;
+  color: #64748b;
+  margin: 0;
+}
+
+.performanceBadge {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  border: 1px solid;
+}
+
+.badgeLow      { background: rgba(248, 113, 113, 0.08); color: #f87171; border-color: rgba(248, 113, 113, 0.25); }
+.badgeModerate { background: rgba(251, 191, 36, 0.08);  color: #fbbf24; border-color: rgba(251, 191, 36, 0.25); }
+.badgeGood     { background: rgba(52, 211, 153, 0.08);  color: #34d399; border-color: rgba(52, 211, 153, 0.25); }
+.badgeExcellent{ background: rgba(34, 197, 94, 0.08);   color: #22c55e; border-color: rgba(34, 197, 94, 0.25); }
+
+/* ─── Overall Assessment ──────────────────────────────────── */
+
+.assessment {
+  font-size: 13px;
+  color: #cbd5e1;
+  line-height: 1.65;
+  padding: 14px 16px;
+  background: rgba(34, 197, 94, 0.04);
+  border: 1px solid rgba(34, 197, 94, 0.1);
+  border-radius: 10px;
+  margin: 0;
+}
+
+/* ─── Section ─────────────────────────────────────────────── */
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sectionTitle {
+  font-size: 11px;
+  font-weight: 600;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin: 0;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #374151;
+}
+
+/* ─── Improvements ────────────────────────────────────────── */
+
+.improvementCard {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid #374151;
+  border-radius: 10px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.improvementHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.improvementMetric {
+  font-size: 13px;
+  font-weight: 600;
+  color: #f9fafb;
+}
+
+.improvementScore {
+  font-size: 12px;
+  color: #22c55e;
+  font-variant-numeric: tabular-nums;
+}
+
+.tipList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.tipItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 12px;
+  color: #94a3b8;
+  line-height: 1.5;
+}
+
+.tipDot {
+  flex-shrink: 0;
+  margin-top: 6px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #22c55e;
+  opacity: 0.7;
+}
+
+/* ─── Caption advice ──────────────────────────────────────── */
+
+.adviceText {
+  font-size: 13px;
+  color: #cbd5e1;
+  line-height: 1.6;
+  padding: 12px 14px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid #374151;
+  border-radius: 10px;
+  margin: 0;
+}
+
+/* ─── Hashtags ──────────────────────────────────────────────  */
+
+.hashtagGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.hashtag {
+  font-size: 12px;
+  font-weight: 500;
+  color: #22c55e;
+  background: rgba(34, 197, 94, 0.08);
+  border: 1px solid rgba(34, 197, 94, 0.2);
+  border-radius: 6px;
+  padding: 4px 10px;
+  cursor: pointer;
+  transition: all 0.15s;
+  user-select: none;
+}
+
+.hashtag:hover {
+  background: rgba(34, 197, 94, 0.16);
+  border-color: rgba(34, 197, 94, 0.4);
+}
+
+/* ─── Best Posting Time ─────────────────────────────────────  */
+
+.timeCard {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid #374151;
+  border-radius: 10px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.timeRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.timeKey {
+  font-size: 11px;
+  font-weight: 600;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  min-width: 62px;
+  padding-top: 1px;
+}
+
+.timeValue {
+  font-size: 13px;
+  color: #cbd5e1;
+  line-height: 1.5;
+}
+
+/* ─── Content quality tips ──────────────────────────────────  */
+
+.bulletList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.bulletItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13px;
+  color: #94a3b8;
+  line-height: 1.55;
+}
+
+.bulletNumber {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgba(34, 197, 94, 0.1);
+  border: 1px solid rgba(34, 197, 94, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 600;
+  color: #22c55e;
+}
+
+/* ─── Novelty insight ────────────────────────────────────── */
+
+.noveltyBox {
+  padding: 14px 16px;
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.06), rgba(16, 185, 129, 0.04));
+  border: 1px solid rgba(34, 197, 94, 0.2);
+  border-radius: 10px;
+}
+
+.noveltyLabel {
+  font-size: 10px;
+  font-weight: 600;
+  color: #22c55e;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 6px;
+}
+
+.noveltyText {
+  font-size: 13px;
+  color: #cbd5e1;
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* ─── Loading / Error state ──────────────────────────────── */
+
+.loadingBox {
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid #374151;
+  border-radius: 10px;
+}
+
+.loadingSpinner {
+  width: 28px;
+  height: 28px;
+  border: 2px solid #374151;
+  border-top-color: #22c55e;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+.loadingText {
+  font-size: 12px;
+  color: #64748b;
+}
+
+.errorBox {
+  padding: 14px 16px;
+  background: rgba(248, 113, 113, 0.06);
+  border: 1px solid rgba(248, 113, 113, 0.2);
+  border-radius: 10px;
+  font-size: 13px;
+  color: #f87171;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ─── Caption / Content Explainability ────────────────────── */
+
+/* Score tag next to section title */
+.sectionTitle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.scoreTag {
+  font-size: 11px;
+  font-weight: 600;
+  color: #22c55e;
+  background: rgba(34, 197, 94, 0.1);
+  border: 1px solid rgba(34, 197, 94, 0.25);
+  border-radius: 5px;
+  padding: 2px 8px;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+/* Sub-card (grouped subsection inside a section) */
+.subCard {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid #374151;
+  border-radius: 10px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.subCardLabel {
+  font-size: 11px;
+  font-weight: 600;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin: 0;
+}
+
+.subCardText {
+  font-size: 13px;
+  color: #cbd5e1;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Tip dot colour variants */
+.tipDotGreen  { background: #22c55e; }
+.tipDotOrange { background: #fb923c; }
+
+/* Rewritten caption box */
+.rewrittenBox {
+  padding: 14px 16px;
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.06), rgba(16, 185, 129, 0.04));
+  border: 1px solid rgba(34, 197, 94, 0.2);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.rewrittenLabel {
+  font-size: 10px;
+  font-weight: 600;
+  color: #22c55e;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin: 0;
+}
+
+.rewrittenText {
+  font-size: 13px;
+  color: #e2e8f0;
+  line-height: 1.65;
+  font-style: italic;
+  margin: 0;
+}
+
+/* Original caption/content box */
+.originalBox {
+  padding: 12px 14px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px dashed #374151;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.originalLabel {
+  font-size: 10px;
+  font-weight: 600;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.originalText {
+  font-size: 12px;
+  color: #94a3b8;
+  line-height: 1.6;
+  font-style: italic;
+}
+
+/* Effective element rows */
+.elementRow {
+  padding: 10px 12px;
+  background: rgba(34, 197, 94, 0.04);
+  border: 1px solid rgba(34, 197, 94, 0.1);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.elementPhrase {
+  font-size: 13px;
+  font-weight: 600;
+  color: #86efac;
+  margin: 0;
+}
+
+.elementReason {
+  font-size: 12px;
+  color: #94a3b8;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.impactTag {
+  font-size: 11px;
+  font-weight: 600;
+  color: #34d399;
+  background: rgba(52, 211, 153, 0.08);
+  border: 1px solid rgba(52, 211, 153, 0.2);
+  border-radius: 5px;
+  padding: 2px 8px;
+  align-self: flex-start;
+}
+
+/* Missing element rows */
+.missingRow {
+  padding: 10px 12px;
+  background: rgba(251, 146, 60, 0.04);
+  border: 1px solid rgba(251, 146, 60, 0.12);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.missingHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.missingTag {
+  font-size: 12px;
+  font-weight: 600;
+  color: #fb923c;
+}
+
+.upliftTag {
+  font-size: 11px;
+  font-weight: 600;
+  color: #fbbf24;
+  background: rgba(251, 191, 36, 0.08);
+  border: 1px solid rgba(251, 191, 36, 0.2);
+  border-radius: 5px;
+  padding: 2px 8px;
+  white-space: nowrap;
+}
+
+.missingReason {
+  font-size: 12px;
+  color: #94a3b8;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.exampleBox {
+  padding: 8px 10px;
+  background: rgba(255, 255, 255, 0.03);
+  border-left: 2px solid #fb923c;
+  border-radius: 0 6px 6px 0;
+}
+
+.exampleLabel {
+  font-size: 11px;
+  font-weight: 600;
+  color: #fb923c;
+}
+
+.exampleText {
+  font-size: 12px;
+  color: #cbd5e1;
+  line-height: 1.5;
+  font-style: italic;
+}
+
+/* Improved versions */
+.versionCard {
+  padding: 12px 14px;
+  background: rgba(34, 197, 94, 0.03);
+  border: 1px solid rgba(34, 197, 94, 0.1);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.versionLabel {
+  font-size: 11px;
+  font-weight: 600;
+  color: #22c55e;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0;
+}
+
+.versionCaption {
+  font-size: 13px;
+  color: #e2e8f0;
+  line-height: 1.6;
+  font-style: italic;
+  margin: 0;
+}
+
+.changesList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  padding-top: 6px;
+}
+
+.changesItem {
+  font-size: 11px;
+  color: #64748b;
+  line-height: 1.5;
+  padding-left: 12px;
+  position: relative;
+}
+
+.changesItem::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: #22c55e;
+  font-size: 10px;
+}
+
+/* Alignment check box */
+.alignmentBox {
+  padding: 12px 14px;
+  background: rgba(251, 191, 36, 0.05);
+  border: 1px solid rgba(251, 191, 36, 0.15);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.alignmentLabel {
+  font-size: 10px;
+  font-weight: 600;
+  color: #fbbf24;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  margin: 0;
+}
+
+.alignmentText {
+  font-size: 13px;
+  color: #cbd5e1;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Priority action rows */
+.priorityRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 10px 12px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid #374151;
+  border-radius: 8px;
+}
+
+.priorityRank {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(34, 197, 94, 0.1);
+  border: 1px solid rgba(34, 197, 94, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 600;
+  color: #22c55e;
+}
+
+.priorityContent {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.priorityAction {
+  font-size: 13px;
+  font-weight: 600;
+  color: #f9fafb;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.priorityWhy {
+  font-size: 12px;
+  color: #94a3b8;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ─── Linguistic Analysis ─────────────────────────────────── */
+
+.lingGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.lingItem {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid #374151;
+  border-radius: 8px;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.lingKey {
+  font-size: 10px;
+  font-weight: 600;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.lingVal {
+  font-size: 13px;
+  font-weight: 500;
+  color: #e2e8f0;
+}
+
+/* ─── Psychological Triggers ─────────────────────────────── */
+
+.triggerRow {
+  padding: 10px 12px;
+  background: rgba(34, 197, 94, 0.03);
+  border: 1px solid rgba(34, 197, 94, 0.1);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.triggerHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.triggerName {
+  font-size: 13px;
+  font-weight: 600;
+  color: #86efac;
+}
+
+.strengthBadge {
+  font-size: 10px;
+  font-weight: 600;
+  border-radius: 5px;
+  padding: 2px 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border: 1px solid;
+}
+
+.strengthStrong   { color: #22c55e; background: rgba(34,197,94,0.1);   border-color: rgba(34,197,94,0.25); }
+.strengthModerate { color: #fbbf24; background: rgba(251,191,36,0.1);  border-color: rgba(251,191,36,0.25); }
+.strengthWeak     { color: #f87171; background: rgba(248,113,113,0.1); border-color: rgba(248,113,113,0.25); }
+
+.triggerEvidence {
+  font-size: 12px;
+  color: #94a3b8;
+  font-style: italic;
+  margin: 0;
+}
+
+.triggerReason {
+  font-size: 12px;
+  color: #64748b;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ─── Engagement Psychology / Friction ───────────────────── */
+
+.frictionBox {
+  padding: 12px 14px;
+  background: rgba(248, 113, 113, 0.04);
+  border: 1px solid rgba(248, 113, 113, 0.15);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.frictionLabel {
+  font-size: 10px;
+  font-weight: 600;
+  color: #f87171;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  margin: 0;
+}
+
+.frictionText {
+  font-size: 13px;
+  color: #cbd5e1;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ─── Root Cause box (inside metric improvement cards) ───── */
+
+.rootCauseBox {
+  padding: 8px 10px;
+  background: rgba(251, 191, 36, 0.04);
+  border-left: 2px solid #fbbf24;
+  border-radius: 0 6px 6px 0;
+  margin-bottom: 2px;
+}
+
+.rootCauseLabel {
+  font-size: 11px;
+  font-weight: 600;
+  color: #fbbf24;
+}
+
+.rootCauseText {
+  font-size: 12px;
+  color: #cbd5e1;
+  line-height: 1.5;
+}
+
+/* ─── Structural Scoring ─────────────────────────────────── */
+
+.scoringRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+
+.scoringRow:last-child {
+  border-bottom: none;
+}
+
+.scoringLabel {
+  font-size: 11px;
+  font-weight: 600;
+  color: #64748b;
+  min-width: 130px;
+  padding-top: 1px;
+  flex-shrink: 0;
+}
+
+.scoringVal {
+  font-size: 12px;
+  color: #cbd5e1;
+  line-height: 1.5;
+}
+
+/* ─── Platform Tip Cards ─────────────────────────────────── */
+
+.platformTipCard {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid #374151;
+  border-radius: 10px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.platformTipTitle {
+  font-size: 13px;
+  font-weight: 600;
+  color: #f9fafb;
+  margin: 0;
+}
+
+.platformTipDetail {
+  font-size: 13px;
+  color: #94a3b8;
+  line-height: 1.55;
+  margin: 0;
+}
+
+.algoReasonBox {
+  padding: 7px 10px;
+  background: rgba(34, 197, 94, 0.04);
+  border-left: 2px solid rgba(34, 197, 94, 0.4);
+  border-radius: 0 6px 6px 0;
+}
+
+.algoReasonLabel {
+  font-size: 11px;
+  font-weight: 600;
+  color: #22c55e;
+}
+
+.algoReasonText {
+  font-size: 12px;
+  color: #94a3b8;
+  line-height: 1.5;
+  font-style: italic;
+}
+
+/* ─── Novelty Insight sub-sections ──────────────────────── */
+
+.noveltySubLabel {
+  font-size: 10px;
+  font-weight: 600;
+  color: rgba(34, 197, 94, 0.7);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  margin: 0 0 3px;
+}
+
+.noveltySubText {
+  font-size: 12px;
+  color: #94a3b8;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SHAP / LIME  Explainability  Styles
+   ═══════════════════════════════════════════════════════════ */
+
+/* Method badge next to section title */
+.methodBadge {
+  font-size: 10px;
+  font-weight: 600;
+  color: #818cf8;
+  background: rgba(129, 140, 248, 0.10);
+  border: 1px solid rgba(129, 140, 248, 0.25);
+  border-radius: 5px;
+  padding: 2px 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* SHAP/LIME loading box */
+.shapLoadingBox {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 16px;
+  background: rgba(129, 140, 248, 0.04);
+  border: 1px solid rgba(129, 140, 248, 0.15);
+  border-radius: 10px;
+}
+
+.shapLoadingText {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.shapLoadingTitle {
+  font-size: 13px;
+  font-weight: 600;
+  color: #a5b4fc;
+  margin: 0;
+}
+
+.shapLoadingHint {
+  font-size: 12px;
+  color: #64748b;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* SHAP/LIME error box */
+.shapErrorBox {
+  padding: 14px 16px;
+  background: rgba(248, 113, 113, 0.05);
+  border: 1px solid rgba(248, 113, 113, 0.18);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.shapErrorText {
+  font-size: 12px;
+  color: #f87171;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.retryBtn {
+  align-self: flex-start;
+  font-size: 11px;
+  font-weight: 600;
+  color: #22c55e;
+  background: none;
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  border-radius: 6px;
+  padding: 4px 12px;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.retryBtn:hover {
+  background: rgba(34, 197, 94, 0.08);
+  border-color: rgba(34, 197, 94, 0.5);
+}
+
+/* Method pills row */
+.methodPills {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.methodPill {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 12px;
+  background: rgba(129, 140, 248, 0.07);
+  border: 1px solid rgba(129, 140, 248, 0.2);
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #a5b4fc;
+  cursor: default;
+}
+
+.methodPillSub {
+  font-size: 10px;
+  font-weight: 400;
+  color: #64748b;
+  text-transform: none;
+}
+
+/* Tab group */
+.tabGroup {
+  display: flex;
+  gap: 4px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid #374151;
+  border-radius: 10px;
+  padding: 4px;
+}
+
+.tab {
+  flex: 1;
+  padding: 7px 10px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #64748b;
+  background: none;
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+  text-align: center;
+  transition: background 0.15s, color 0.15s;
+  letter-spacing: 0.02em;
+}
+
+.tab:hover {
+  color: #94a3b8;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.tabActive {
+  background: rgba(129, 140, 248, 0.12);
+  color: #a5b4fc;
+  border: 1px solid rgba(129, 140, 248, 0.25);
+}
+
+/* Metric (target) pills */
+.targetPills {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.targetPill {
+  padding: 4px 12px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #64748b;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid #374151;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.targetPill:hover {
+  color: #94a3b8;
+  border-color: #374151;
+}
+
+.targetPillActive {
+  background: rgba(34, 197, 94, 0.1);
+  color: #22c55e;
+  border-color: rgba(34, 197, 94, 0.3);
+}
+
+/* Concordance check banner */
+.concordanceBox {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.concordanceAgree {
+  background: rgba(34, 197, 94, 0.05);
+  border: 1px solid rgba(34, 197, 94, 0.18);
+  color: #86efac;
+}
+
+.concordanceWarn {
+  background: rgba(251, 191, 36, 0.05);
+  border: 1px solid rgba(251, 191, 36, 0.18);
+  color: #fde68a;
+}
+
+.concordanceIcon {
+  font-weight: 600;
+  font-size: 14px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.concordanceText {
+  flex: 1;
+}
+
+/* Bar chart container */
+.barChart {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* One row in the bar chart */
+.featureRow {
+  display: grid;
+  grid-template-columns: 160px 1fr auto;
+  align-items: center;
+  gap: 10px;
+}
+
+.featureMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.featureLabel {
+  font-size: 11px;
+  font-weight: 600;
+  color: #94a3b8;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.featureValue {
+  font-size: 10px;
+  color: #475569;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.featureRangeTag {
+  font-size: 10px;
+  color: #475569;
+  font-family: ui-monospace, monospace;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Bar track and fill */
+.barTrack {
+  width: 100%;
+  height: 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.barFill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.4s ease;
+  min-width: 2px;
+}
+
+.barPos {
+  background: linear-gradient(90deg, rgba(34, 197, 94, 0.5), rgba(34, 197, 94, 0.85));
+}
+
+.barNeg {
+  background: linear-gradient(90deg, rgba(248, 113, 113, 0.5), rgba(248, 113, 113, 0.85));
+}
+
+/* Meta column (pct + shap value) */
+.barMeta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1px;
+  min-width: 54px;
+}
+
+.barPct {
+  font-size: 11px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.shapVal {
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+}
+
+.pctPos { color: #34d399; }
+.pctNeg { color: #f87171; }
+
+/* SHAP description text */
+.shapDesc {
+  font-size: 12px;
+  color: #64748b;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* SHAP summary paragraph */
+.shapSummary {
+  font-size: 12px;
+  color: #94a3b8;
+  line-height: 1.65;
+  padding: 10px 12px;
+  background: rgba(129, 140, 248, 0.05);
+  border-left: 2px solid rgba(129, 140, 248, 0.35);
+  border-radius: 0 6px 6px 0;
+  margin: 0;
+  margin-top: 4px;
+}
+
+/* ── LIME Text word visualizations ── */
+
+.wordCloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid #374151;
+  border-radius: 8px;
+}
+
+.wordPill {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 14px;
+  font-weight: 600;
+  cursor: default;
+  transition: transform 0.1s;
+}
+
+.wordPill:hover {
+  transform: scale(1.06);
+}
+
+.wordPillPos {
+  background: rgba(34, 197, 94, 0.1);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  color: #86efac;
+}
+
+.wordPillNeg {
+  background: rgba(248, 113, 113, 0.1);
+  border: 1px solid rgba(248, 113, 113, 0.3);
+  color: #fca5a5;
+}
+
+.wordToken {
+  font-size: 12px;
+  font-weight: 600;
+  font-style: italic;
+}
+
+/* Helper colours (already defined as pctPos/pctNeg but aliased here for clarity) */
+.posWord { color: #34d399; }
+.negWord { color: #f87171; }
+

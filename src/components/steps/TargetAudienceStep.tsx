@@ -26,10 +26,10 @@ const GENDERS = [
 ];
 
 const INCOME_LEVELS = [
-  'Low income (Under $30k)',
-  'Middle income ($30k-$75k)',
-  'Upper middle ($75k-$150k)',
-  'High income ($150k+)',
+  'Low income (Under LKR 1M annually)',
+  'Middle income (LKR 1M-2.5M annually)',
+  'Upper middle (LKR 2.5M-5M annually)',
+  'High income (LKR 5M+ annually)',
   'Mixed income levels'
 ];
 
@@ -56,11 +56,17 @@ const BUYING_FREQUENCIES = [
 ];
 
 export function TargetAudienceStep({ data, onDataUpdate }: TargetAudienceStepProps) {
-  const { register, watch, setValue } = useForm<TargetAudience>({
+  const { register, watch, setValue, reset } = useForm<TargetAudience>({
     defaultValues: data
   });
 
   const watchedData = watch();
+
+  // Reset form when data prop changes
+  useEffect(() => {
+    console.log('📥 TargetAudienceStep received data:', data);
+    reset(data);
+  }, [data, reset]);
 
   useEffect(() => {
     const subscription = watch((value) => {

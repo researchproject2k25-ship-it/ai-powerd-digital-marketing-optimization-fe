@@ -222,7 +222,7 @@ export class FormDataProcessorService {
   /**
    * Send processed data to backend API
    */
-  async sendToBackend(processedData: ProcessedFormData): Promise<BackendSubmissionResponse> {
+  async sendToBackend(processedData: ProcessedFormData, profileId?: string | null): Promise<BackendSubmissionResponse> {
     try {
       // Convert processed data to the backend's expected format
       const backendData = this.convertToBackendFormat(processedData);
@@ -232,11 +232,16 @@ export class FormDataProcessorService {
       await apiService.testConnection();
       console.log('✅ Backend connection successful');
       
-      // Submit form data
-      console.log('🔄 Submitting form data to backend...');
-      const result = await apiService.submitForm(backendData);
-      
-      return result;
+      // Submit or update form data
+      if (profileId) {
+        console.log('🔄 Updating profile:', profileId);
+        const result = await apiService.updateProfile(profileId, backendData);
+        return result;
+      } else {
+        console.log('🔄 Submitting new form data to backend...');
+        const result = await apiService.submitForm(backendData);
+        return result;
+      }
       
     } catch (error) {
       console.error('Failed to send data to backend:', error);
@@ -387,7 +392,8 @@ export class FormDataProcessorService {
    */
   async processAndSubmit(
     formData: any, // Accept any format and normalize internally
-    options: ProcessingOptions = {}
+    options: ProcessingOptions = {},
+    profileId?: string | null // Optional profile ID for updates
   ) {
     // Process the form data
     const processingResult = await this.processFormData(formData, options);
@@ -400,9 +406,9 @@ export class FormDataProcessorService {
     const aiPrompt = this.generateAIPrompt(processingResult.data);
     console.log('🤖 Generated AI Prompt:', aiPrompt);
 
-    // Send to backend
+    // Send to backend (create or update)
     try {
-      const backendResponse = await this.sendToBackend(processingResult.data);
+      const backendResponse = await this.sendToBackend(processingResult.data, profileId);
       
       return {
         ...processingResult,
@@ -444,7 +450,7 @@ export class FormDataProcessorService {
       { path: 'targetAudience.demographics.ageRange', value: targetAudience.demographics?.ageRange },
       { path: 'businessGoals.primaryGoal', value: businessGoals.primaryGoal },
       { path: 'budgetResources.monthlyBudget', value: budgetResources.monthlyBudget },
-      { path: 'platformsPreferences.preferredPlatforms', value: platformsPreferences.preferredPlatforms },
+      // platformsPreferences.preferredPlatforms is optional - removed from required fields
     ];
 
     const missingFields: string[] = [];

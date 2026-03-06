@@ -73,11 +73,16 @@ const COMMON_CHALLENGES = [
 ];
 
 export function CurrentChallengesStep({ data, onDataUpdate }: CurrentChallengesStepProps) {
-  const { register, watch, setValue } = useForm<CurrentChallenges>({
+  const { register, watch, setValue, reset } = useForm<CurrentChallenges>({
     defaultValues: data
   });
 
   const watchedData = watch();
+
+  useEffect(() => {
+    console.log('📥 [CurrentChallengesStep] received data:', data);
+    reset(data);
+  }, [data, reset]);
 
   useEffect(() => {
     const subscription = watch((value) => {

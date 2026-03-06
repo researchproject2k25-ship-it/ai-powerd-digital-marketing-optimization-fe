@@ -1,6 +1,7 @@
 import '../styles/globals.css'
 import type { Metadata } from 'next'
 import { Montserrat, Poppins } from 'next/font/google'
+import { AuthProvider } from '@/contexts/AuthContext'
 
 const montserrat = Montserrat({ 
   subsets: ['latin'],
@@ -27,7 +28,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${montserrat.variable} ${poppins.variable} font-sans`}>{children}</body>
+      <body className={`${montserrat.variable} ${poppins.variable} font-sans`}>
+        <AuthProvider>
+          {children}
+        </AuthProvider>
+      </body>
     </html>
   )
 }

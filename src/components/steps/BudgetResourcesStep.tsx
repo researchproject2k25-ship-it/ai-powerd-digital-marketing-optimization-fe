@@ -10,12 +10,12 @@ interface BudgetResourcesStepProps {
 }
 
 const BUDGET_RANGES = [
-  'Under $500/month',
-  '$500 - $1,000/month',
-  '$1,000 - $2,500/month',
-  '$2,500 - $5,000/month',
-  '$5,000 - $10,000/month',
-  'Over $10,000/month'
+  'Under LKR 50,000/month',
+  'LKR 50,000 - 100,000/month',
+  'LKR 100,000 - 250,000/month',
+  'LKR 250,000 - 500,000/month',
+  'LKR 500,000 - 1,000,000/month',
+  'Over LKR 1,000,000/month'
 ];
 
 const CONTENT_CAPACITIES = [
@@ -28,12 +28,17 @@ const CONTENT_CAPACITIES = [
 ];
 
 export function BudgetResourcesStep({ data, onDataUpdate }: BudgetResourcesStepProps) {
-  const { register, watch, setValue, handleSubmit } = useForm<MarketingBudgetResources>({
+  const { register, watch, setValue, handleSubmit, reset } = useForm<MarketingBudgetResources>({
     defaultValues: data
   });
 
   const watchedData = watch();
   const hasMarketingTeam = watch('hasMarketingTeam');
+
+  useEffect(() => {
+    console.log('📥 [BudgetResourcesStep] received data:', data);
+    reset(data);
+  }, [data, reset]);
 
   useEffect(() => {
     const subscription = watch((value) => {

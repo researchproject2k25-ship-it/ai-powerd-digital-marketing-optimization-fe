@@ -37,17 +37,17 @@ export default function DashboardHome() {
             </h1>
             
             <p className="text-lg md:text-xl text-[#CBD5E1] max-w-2xl mx-auto leading-relaxed">
-              Strategy, content, analytics, and insights powered by AI and real-time intelligence
+              Your all-in-one marketing toolkit — strategy, content, analytics, and insights, all powered by AI
             </p>
           </div>
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <button
-              onClick={() => router.push('/dashboard/strategy')}
+              onClick={() => router.push('/')}
               className="group px-8 py-4 bg-[#22C55E] text-[#0B0F14] rounded-xl font-medium hover:bg-[#16A34A] transition-all flex items-center gap-2"
             >
-              Get Started
+              Create My Strategy
               <ArrowRightIcon className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
             </button>
             
@@ -55,7 +55,7 @@ export default function DashboardHome() {
               onClick={() => router.push('/dashboard/strategy')}
               className="px-8 py-4 bg-[#0B0F14] text-[#F9FAFB] rounded-xl font-medium border border-[#1F2933] hover:border-[#CBD5E1]/20 transition-all backdrop-blur-sm"
             >
-              View Demo
+              View My Strategy
             </button>
           </div>
 
@@ -68,7 +68,7 @@ export default function DashboardHome() {
                   <path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
                 </svg>
               </div>
-              <span className="text-xs text-[#CBD5E1]">Strategy Generation</span>
+              <span className="text-xs text-[#CBD5E1]">Smart Strategy</span>
             </div>
             
             {/* Content Generation */}
@@ -88,7 +88,7 @@ export default function DashboardHome() {
                   <path strokeLinecap="round" strokeLinejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                 </svg>
               </div>
-              <span className="text-xs text-[#CBD5E1]">Performance Prediction</span>
+              <span className="text-xs text-[#CBD5E1]">Track Results</span>
             </div>
 
             {/* Chatbot */}
@@ -109,3 +109,4 @@ export default function DashboardHome() {
     </div>
   );
 }
+
