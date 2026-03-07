@@ -1,5 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+// Allow up to 300s for this route (phi3 CPU inference can be slow)
+export const maxDuration = 300;
+export const dynamic = 'force-dynamic';
+
 const BACKEND_URL = (process.env.SA_BACKEND_URL || 'http://4.145.88.11:8000').replace(/\/$/, '');
 
 async function proxyRequest(
