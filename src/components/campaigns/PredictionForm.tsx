@@ -4,6 +4,7 @@ import { useState, useCallback } from 'react';
 import styles from './PredictionForm.module.css';
 import { API_BASE_URL } from '@/config/api';
 import ImageUpload from './ImageUpload';
+import { CAMPAIGN_API_BASE_URL } from '@/config/api';
 
 export interface FormValues {
   caption: string;
@@ -66,7 +67,7 @@ export default function PredictionForm({ onResult, onLoading, loading }: Predict
     onLoading(true);
 
     try {
-      const res = await fetch(`${API_BASE_URL}/api/predict`, {
+      const res = await fetch(`${CAMPAIGN_API_BASE_URL}/api/predict`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

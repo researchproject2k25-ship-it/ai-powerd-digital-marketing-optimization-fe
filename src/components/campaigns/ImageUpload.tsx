@@ -2,6 +2,7 @@
 
 import { useRef, useState, DragEvent, ChangeEvent } from 'react';
 import styles from './ImageUpload.module.css';
+import { CAMPAIGN_API_BASE_URL } from '@/config/api';
 
 interface ImageUploadProps {
   onExtracted: (text: string) => void;
@@ -58,7 +59,7 @@ export default function ImageUpload({ onExtracted }: ImageUploadProps) {
       const formData = new FormData();
       formData.append('image', file);
 
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/extract`, {
+      const res = await fetch(`${CAMPAIGN_API_BASE_URL}/api/extract`, {
         method: 'POST',
         body: formData,
       });

@@ -17,6 +17,9 @@
 export const API_BASE_URL =
   process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
 
+export const CAMPAIGN_API_BASE_URL =
+  process.env.NEXT_PUBLIC_CAMPAIGN_BASE_URL || 'http://localhost:5000';
+
 /** Convenience helper – returns JSON headers, with optional Bearer token */
 export function buildHeaders(token?: string): HeadersInit {
   const headers: HeadersInit = { 'Content-Type': 'application/json' };

@@ -8,7 +8,7 @@ import PredictionForm, { type PredictionOutput, type FormValues } from '@/compon
 import PredictionResults from '@/components/campaigns/PredictionResults';
 import ExplainabilityPanel from '@/components/campaigns/ExplainabilityPanel';
 import RecommendationsPanel from '@/components/campaigns/RecommendationsPanel';
-import { API_BASE_URL } from '@/config/api';
+import { CAMPAIGN_API_BASE_URL } from '@/config/api';
 import styles from './styles/campaigns.module.css';
 
 /* ─── Types ──────────────────────────────────────────────────── */
@@ -186,7 +186,7 @@ export default function PerformancePredictorPage() {
     setHistoryLoading(true);
     setHistoryError(null);
     try {
-      const res = await fetch(`${API_BASE_URL}/api/history`);
+      const res = await fetch(`${CAMPAIGN_API_BASE_URL}/api/history`);
       const json = await res.json();
       if (!res.ok || !json.success) throw new Error(json.error || 'Failed to load history');
       setHistoryItems(json.data);
@@ -205,7 +205,7 @@ export default function PerformancePredictorPage() {
   const handleDelete = async (id: string) => {
     setDeletingId(id);
     try {
-      const res = await fetch(`${API_BASE_URL}/api/history/${id}`, { method: 'DELETE' });
+      const res = await fetch(`${CAMPAIGN_API_BASE_URL}/api/history/${id}`, { method: 'DELETE' });
       const json = await res.json();
       if (!res.ok || !json.success) throw new Error(json.error || 'Delete failed');
       setHistoryItems((prev) => prev.filter((x) => x._id !== id));
@@ -218,7 +218,7 @@ export default function PerformancePredictorPage() {
 
   const handleView = async (id: string) => {
     try {
-      const res = await fetch(`${API_BASE_URL}/api/history/${id}`);
+      const res = await fetch(`${CAMPAIGN_API_BASE_URL}/api/history/${id}`);
       const json = await res.json();
       if (!res.ok || !json.success) throw new Error(json.error || 'Failed to load');
       setViewingItem(json.data);
