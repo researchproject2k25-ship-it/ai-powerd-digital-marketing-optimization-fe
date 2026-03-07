@@ -13,15 +13,6 @@ function timeAgo(date: string): string {
   return `${days}d ago`;
 }
 
-const tagColors: Record<string, string> = {
-  strategy: '#3B82F6',
-  pricing: '#F59E0B',
-  support: '#EF4444',
-  inventory: '#8B5CF6',
-  content: '#EC4899',
-  marketing: '#10B981',
-};
-
 interface Props {
   session: ChatSessionSummary;
   onSelect: (id: string) => void;
@@ -29,10 +20,8 @@ interface Props {
 }
 
 export default function RecentChatItem({ session, onSelect, onDelete }: Props) {
-  const tagColor = tagColors[session.topicTag || ''] || '#6B7280';
-
   return (
-    <div className="sa-recent-item" role="button" tabIndex={0} onClick={() => onSelect(session._id)} onKeyDown={(e) => { if (e.key === 'Enter') onSelect(session._id); }}>
+    <div className="sa-recent-item" tabIndex={0} onClick={() => onSelect(session._id)} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') onSelect(session._id); }}>
       <div className="sa-recent-item-top">
         <span className="sa-recent-item-title">{session.title || 'Untitled chat'}</span>
         <span className="sa-recent-item-time">{timeAgo(session.createdAt)}</span>
@@ -40,7 +29,7 @@ export default function RecentChatItem({ session, onSelect, onDelete }: Props) {
       {session.summary && <p className="sa-recent-item-summary">{session.summary}</p>}
       <div className="sa-recent-item-bottom">
         {session.topicTag && (
-          <span className="sa-topic-tag" style={{ backgroundColor: tagColor + '22', color: tagColor }}>
+          <span className="sa-topic-tag" data-topic={session.topicTag || 'other'}>
             {session.topicTag}
           </span>
         )}

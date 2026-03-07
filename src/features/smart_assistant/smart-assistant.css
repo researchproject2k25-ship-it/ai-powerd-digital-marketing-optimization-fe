@@ -706,6 +706,7 @@
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
   -webkit-box-orient: vertical;
 }
 
@@ -722,7 +723,15 @@
   border-radius: 99px;
   font-weight: 500;
   text-transform: capitalize;
+  background-color: var(--tag-bg, #6B728022);
+  color: var(--tag-fg, #6B7280);
 }
+.sa-topic-tag[data-topic="strategy"]  { --tag-bg: #3B82F622; --tag-fg: #3B82F6; }
+.sa-topic-tag[data-topic="pricing"]   { --tag-bg: #F59E0B22; --tag-fg: #F59E0B; }
+.sa-topic-tag[data-topic="support"]   { --tag-bg: #EF444422; --tag-fg: #EF4444; }
+.sa-topic-tag[data-topic="inventory"] { --tag-bg: #8B5CF622; --tag-fg: #8B5CF6; }
+.sa-topic-tag[data-topic="content"]   { --tag-bg: #EC489922; --tag-fg: #EC4899; }
+.sa-topic-tag[data-topic="marketing"] { --tag-bg: #10B98122; --tag-fg: #10B981; }
 
 .sa-delete-btn {
   background: none;
@@ -1624,10 +1633,7 @@
   gap: 1.25rem;
 }
 
-/* Widget info card */
-.sa-widget-info-card {
-  /* extends .sa-info-card */
-}
+/* Widget info card — inherits all .sa-info-card styles */
 
 .sa-widget-desc {
   font-size: 0.82rem;

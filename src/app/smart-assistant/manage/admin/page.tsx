@@ -148,7 +148,7 @@ export default function AdminDashboardPage() {
       await uploadDocument(file);
       const fresh = await listDocuments();
       setDocuments(fresh);
-      flash(`"${file.name}" uploaded — embedding in progress in progress.`);
+      flash(`"${file.name}" uploaded — embedding in progress.`);
     } catch (err: unknown) { flash(err instanceof Error ? err.message : 'Upload failed.'); }
     finally { setUploading(false); if (fileInputRef.current) fileInputRef.current.value = ''; }
   }
